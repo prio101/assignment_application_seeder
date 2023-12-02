@@ -1,26 +1,31 @@
-# Use the official Ruby image with version 3.x
+# Use an official Ruby runtime as a parent image
 FROM ruby:3.0.0
 
+# Install Dependencies
+RUN apt-get update \
+    && apt-get install -qq -y build-essential xvfb xdg-utils wget ffmpeg libpq-dev vim libmagick++-dev fonts-liberation sox bc --no-install-recommends\
+    && apt-get clean
+
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /usr/src/app
 
-# Install system dependencies
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-
-# Install gems
+# Copy the Gemfile and Gemfile.lock into the container
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler:2.2.29 && bundle install
 
-# Copy the application code into the container
+# copy the entrypoint script
+COPY entrypoint.sh /usr/bin/
+RUN chmod 755 /usr/bin/entrypoint.sh
+# Install bundle and gems
+RUN gem install bundler && bundle install
+
+# Copy the current directory contents into the container
 COPY . .
+
+# Run the entrypoint script
+ENTRYPOINT ["entrypoint.sh"]
 
 # Expose port 3000 to the outside world
 EXPOSE 3000
-
-# Entrypoint script to handle process initialization
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
 
 # Start the Rails application
 CMD ["rails", "server", "-b", "0.0.0.0"]

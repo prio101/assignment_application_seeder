@@ -7,10 +7,10 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  host: db
   pool: 5
   username: postgres
-  password: postgres
-  host: db
+  password: password
   port: 5432
 
 development:
