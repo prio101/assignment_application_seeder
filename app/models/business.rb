@@ -33,4 +33,8 @@ class Business < ApplicationRecord
 
   scope :active, -> { where(status: :active) }
   scope :available, -> { where("shares_available > 0") }
+
+  def shares_sold
+    buy_orders.sum(:quantity)
+  end
 end

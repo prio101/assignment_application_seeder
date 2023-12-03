@@ -60,4 +60,11 @@ RSpec.describe Business, type: :model do
       should belong_to(:owner)
     end
   end
+
+  describe '#shares_sold' do
+    it 'should return the sum of all buy orders quantity' do
+      buy_orders = FactoryBot.create_list(:buy_order, 5, business: business)
+      expect(business.shares_sold).to eq(buy_orders.sum(&:quantity))
+    end
+  end
 end

@@ -27,7 +27,7 @@ RSpec.describe BuyOrder, type: :model do
   let(:buyer) { FactoryBot.create(:user, :buyer) }
   let(:owner) { FactoryBot.create(:user, :owner) }
   let(:business) { FactoryBot.create(:business, owner: owner) }
-  let(:buy_order) { FactoryBot.create(:buy_order, buyer: buyer, business: business) }
+  let(:buy_order) { FactoryBot.create(:buy_order, buyer: buyer, business: business, quantity: 2) }
 
   describe 'validations' do
     it 'should be valid with a buyer and a business' do
@@ -54,6 +54,18 @@ RSpec.describe BuyOrder, type: :model do
 
     it 'should belongs to a business' do
       should belong_to(:business)
+    end
+  end
+
+  describe '#update_shares_available' do
+    let(:initial_shares_available) { 100.0 }
+    it 'should update shares available for business' do
+      business.shares_available = initial_shares_available
+      business.save
+      business.reload
+      expect(business.shares_available).to eq(initial_shares_available.to_d)
+      buy_order.update_shares_available
+      expect(business.shares_available.to_s).to eq((initial_shares_available - buy_order.quantity).to_s)
     end
   end
 end
