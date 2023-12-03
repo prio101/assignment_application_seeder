@@ -4,13 +4,13 @@ class Api::V1::Owners::BusinessesController < ApplicationController
   # Does not require status to be active or available
   def index
     @businesses = current_user.businesses
-    render json: @businesses, status: :ok
+    render status: :ok
   end
 
   def create
     @business = current_user.businesses.new(business_params)
     if @business.save
-      render json: @business, status: :created
+      render status: :created
     else
       render json: @business.errors, status: :unprocessable_entity
     end
@@ -29,6 +29,6 @@ class Api::V1::Owners::BusinessesController < ApplicationController
   private
 
   def business_params
-    params.require(:business).permit(:name, :share_availability)
+    params.require(:business).permit(:name, :shares_available)
   end
 end

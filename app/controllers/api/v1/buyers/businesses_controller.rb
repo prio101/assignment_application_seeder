@@ -10,7 +10,7 @@ module Api
           if @businesses.empty?
             render json: { error: "No businesses found" }, status: :not_found
           else
-            render json: @businesses, status: :ok
+            render status: :ok
           end
         end
 
@@ -20,7 +20,7 @@ module Api
         def show
           @business = Business.active.available.find_by(id: params[:id])
           if @business.present?
-            render json: @business, status: :ok
+            render status: :ok
           else
             render json: { error: "Business not found" }, status: :not_found
           end
