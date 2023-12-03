@@ -43,11 +43,14 @@ group :development, :test do
   gem 'faker'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
+  gem 'shoulda-matchers', '~> 5.0'
+  gem 'annotate'
+  gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'simplecov', require: false
 end
 
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   gem "spring"
-  gem 'capybara'
-  gem 'selenium-webdriver'
 end
