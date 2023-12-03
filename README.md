@@ -50,9 +50,9 @@ You can check the coverage by running `docker compose run web rspec` and then op
 **Estimated Coverage: > 95%**
 
 
-### Variations:
+### Variations of Web Application:
 
 There are few variation for this single application available right now on three different branches:
 1. `main` -> has the basic implementation of the application, with controller providing the API responses.
 2. `fast_json_api` -> has the implementation of the application using fast_json_api, with controller -> serializer providing the API responses.
-3. `jbuilder` -> has the implementation of the application using jbuilder, with controller -> jbuilder views providing the API responses.
+3. `jbuilder` -> has the implementation of the application using jbuilder, with controller -> jbuilder views providing the API responses. (This branch does not have the proper test coverage yet. You will have to use the POSTMAN collection to test the endpoints.)
