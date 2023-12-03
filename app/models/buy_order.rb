@@ -25,5 +25,11 @@ class BuyOrder < ApplicationRecord
   belongs_to :business
   belongs_to :buyer, class_name: "User"
 
+  validates :quantity, :price, :status, presence: true
+
   enum status: { pending: 'pending', accepted: 'accept', rejected: 'rejected' }
+
+  def self.serialized_response(buy_orders)
+    
+  end
 end

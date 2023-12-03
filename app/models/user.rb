@@ -29,4 +29,8 @@ class User < ApplicationRecord
 
   validates_presence_of :email, :password
   validates_uniqueness_of :email
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 end
