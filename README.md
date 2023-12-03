@@ -15,8 +15,6 @@
 ### API Endpoints
 
 Here are we have the API endpoints that you can use to interact with the application:
-
-#### Postman API Collection:
 We have the collection for apis for POSTMAN in This Link: `https://api.postman.com/collections/2329385-c37ec82d-f743-4240-ac4d-4deb31c48408?access_key=PMAT-01HGR2EC22KXJ4ZW2NH7CR6BKJ`
 
 
@@ -49,6 +47,7 @@ Here we are attaching an ERD representation of the database schema:
 2. Added Integration Tests for all the controllers
 
 You can check the coverage by running `docker compose run web rspec` and then opening the `coverage/index.html` file in your browser.
+**Estimated Coverage: > 95%**
 
 
 ### Variations:
