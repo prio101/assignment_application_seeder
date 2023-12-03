@@ -14,10 +14,15 @@ class Api::V1::Owners::BuyOrdersController < ApplicationController
   def update
     @buy_order = BuyOrder.find_by(id: params[:id])
     if @buy_order.update(status: buy_order_params[:status])
+      ActiveRecord::Base.transaction do
+        @buy_order.update_shares_available
+      end
       render json: @buy_order, status: :ok
     else
       render json: @buy_order.errors, status: :unprocessable_entity
     end
+  rescue => e
+    render json: { error: e.message }, status: :unprocessable_entity
   end
 
   private
@@ -34,7 +39,8 @@ class Api::V1::Owners::BuyOrdersController < ApplicationController
         price: buy_order.price,
         status: buy_order.status,
         business: buy_order.business.name,
-        buyer: buy_order.buyer.name
+        buyer: buy_order.buyer.name,
+        shares_available: buy_order.business.shares_available
       }
     end
   end

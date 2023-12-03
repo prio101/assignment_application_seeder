@@ -26,6 +26,18 @@ module Api
           end
         end
       end
+
+      private
+
+      def business_response(business)
+        {
+          id: business.id,
+          name: business.name,
+          price: business.price,
+          shares_sold: business.shares_available,
+          owner: business.owner.name
+        }
+      end
     end
   end
 end

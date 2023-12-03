@@ -29,7 +29,7 @@ class BuyOrder < ApplicationRecord
 
   enum status: { pending: 'pending', accepted: 'accept', rejected: 'rejected' }
 
-  def self.serialized_response(buy_orders)
-    
+  def update_shares_available
+    business.update!(shares_available: business.shares_available - quantity)
   end
 end

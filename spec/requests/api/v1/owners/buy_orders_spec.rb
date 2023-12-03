@@ -31,6 +31,7 @@ RSpec.describe "Api::V1::Owners::BuyOrders", type: :request do
         expect(json.first['buyer']).to eq(buy_order.buyer.name)
         expect(json.first['quantity']).to eq(buy_order.quantity.to_s)
         expect(json.first['price']).to eq(buy_order.price.to_s)
+        expect(json.first['shares_available']).to eq(buy_order.business.shares_available.to_s)
       end
     end
 
