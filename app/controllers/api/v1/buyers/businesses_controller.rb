@@ -10,7 +10,7 @@ module Api
           if @businesses.empty?
             render json: { error: "No businesses found" }, status: :not_found
           else
-            render json: @businesses, status: :ok
+            render json: BusinessSerializer.new(@businesses).serializable_hash, status: :ok
           end
         end
 
@@ -20,23 +20,11 @@ module Api
         def show
           @business = Business.active.available.find_by(id: params[:id])
           if @business.present?
-            render json: @business, status: :ok
+            render json: BusinessSerializer.new(@business).serializable_hash, status: :ok
           else
             render json: { error: "Business not found" }, status: :not_found
           end
         end
-      end
-
-      private
-
-      def business_response(business)
-        {
-          id: business.id,
-          name: business.name,
-          price: business.price,
-          shares_sold: business.shares_available,
-          owner: business.owner.name
-        }
       end
     end
   end

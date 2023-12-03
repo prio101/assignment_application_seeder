@@ -25,13 +25,13 @@ RSpec.describe "Api::V1::Owners::BuyOrders", type: :request do
 
       it 'should show active and available buy_orders' do
         json = JSON.parse(response.body)
-        expect(json.first['id']).to eq(buy_order.id)
-        expect(json.first['status']).to eq(buy_order.status)
-        expect(json.first['business']).to eq(buy_order.business.name)
-        expect(json.first['buyer']).to eq(buy_order.buyer.name)
-        expect(json.first['quantity']).to eq(buy_order.quantity.to_s)
-        expect(json.first['price']).to eq(buy_order.price.to_s)
-        expect(json.first['shares_available']).to eq(buy_order.business.shares_available.to_s)
+        expect(json["data"].first["attributes"]['id']).to eq(buy_order.id)
+        expect(json["data"].first["attributes"]['status']).to eq(buy_order.status)
+        expect(json["data"].first["attributes"]['business']).to eq(buy_order.business.name)
+        expect(json["data"].first["attributes"]['buyer']).to eq(buy_order.buyer.name)
+        expect(json["data"].first["attributes"]['quantity']).to eq(buy_order.quantity.to_s)
+        expect(json["data"].first["attributes"]['price']).to eq(buy_order.price.to_s)
+        expect(json["data"].first["attributes"]['shares_available']).to eq(buy_order.business.shares_available.to_s)
       end
     end
 
@@ -56,6 +56,8 @@ RSpec.describe "Api::V1::Owners::BuyOrders", type: :request do
   describe 'PATCH /api/v1/owners/:owner_id/buy_orders/:id' do
     context 'when correct params are passed' do
       before(:each) do
+        buy_order.business.update(shares_available: 1000)
+        buy_order.business.reload
         patch "/api/v1/owners/#{owner.id}/buy_orders/#{buy_order.id}",
           params: { buy_order: valid_params },
           headers: basic_auth_headers(owner.email, 'password')
@@ -66,10 +68,8 @@ RSpec.describe "Api::V1::Owners::BuyOrders", type: :request do
       end
 
       it 'should update the buy_order' do
-        buy_order.business.update(shares_available: 1000)
-        buy_order.business.reload
         json = JSON.parse(response.body)
-        expect(json['status']).to eq(valid_params[:status])
+        expect(json["data"]["attributes"]["status"]).to eq(valid_params[:status])
       end
     end
 

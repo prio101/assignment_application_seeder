@@ -5,7 +5,7 @@ class Api::V1::UsersController < ApplicationController
 
   def index
     @users = User.all
-    render json: { data: @users }, status: :ok
+    render json: { data: UserSerializer.new(@users).serializable_hash }, status: :ok
 
   rescue => e
     render json: { error: e.message }, status: :internal_server_error
@@ -13,7 +13,7 @@ class Api::V1::UsersController < ApplicationController
 
   def show
     if @user.present?
-      render json: { data: @user }, status: :ok
+      render json: { data: UserSerializer.new(@user).serializable_hash }, status: :ok
     else
       render json: { error: "User not found" }, status: :not_found
     end
@@ -24,7 +24,7 @@ class Api::V1::UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      render json: { data: @user }, status: :created
+      render json: { data: UserSerializer.new(@user).serializable_hash }, status: :created
     else
       render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class Api::V1::UsersController < ApplicationController
 
   def update
     if @user.update(params[:user])
-      render json: { data: @user }, status: :redirected
+      render json: { data: UserSerializer.new(@user).serializable_hash }, status: :redirected
     else
       render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
     end
