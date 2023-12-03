@@ -46,12 +46,4 @@ RSpec.describe "Businesses", type: :request do
 
 
   end
-
-  private
-
-  def basic_auth_headers(username, password)
-    {
-      'HTTP_AUTHORIZATION' => ActionController::HttpAuthentication::Basic.encode_credentials(username, password)
-    }
-  end
 end

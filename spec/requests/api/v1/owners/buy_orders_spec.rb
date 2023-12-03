@@ -66,6 +66,8 @@ RSpec.describe "Api::V1::Owners::BuyOrders", type: :request do
       end
 
       it 'should update the buy_order' do
+        buy_order.business.update(shares_available: 1000)
+        buy_order.business.reload
         json = JSON.parse(response.body)
         expect(json['status']).to eq(valid_params[:status])
       end
@@ -87,13 +89,5 @@ RSpec.describe "Api::V1::Owners::BuyOrders", type: :request do
         expect(json['status']).to eq(["can't be blank"])
       end
     end
-  end
-
-  private
-
-  def basic_auth_headers(email, password)
-    {
-      'HTTP_AUTHORIZATION' => ActionController::HttpAuthentication::Basic.encode_credentials(email, password)
-    }
   end
 end

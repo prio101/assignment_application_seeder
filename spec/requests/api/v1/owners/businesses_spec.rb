@@ -74,13 +74,5 @@ RSpec.describe "Api::V1::Owners::Businesses", type: :request do
         end
       end
     end
-
-    private
-
-    def basic_auth_headers(email, password)
-      {
-        'HTTP_AUTHORIZATION' => ActionController::HttpAuthentication::Basic.encode_credentials(email, password)
-      }
-    end
   end
 end
