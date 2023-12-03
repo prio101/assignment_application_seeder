@@ -43,7 +43,5 @@ RSpec.describe "Businesses", type: :request do
         expect(json['data']['id']).to eq(business.id)
       end
     end
-
-
   end
 end
