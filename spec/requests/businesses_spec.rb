@@ -14,7 +14,7 @@ RSpec.describe "Businesses", type: :request do
 
     it 'should show all businesses' do
       json = JSON.parse(response.body)
-      expect(json['data'].first['id']).to eq(business.id)
+      expect(json['data'].first['id']).to eq(business.id.to_s)
     end
   end
 
@@ -40,7 +40,7 @@ RSpec.describe "Businesses", type: :request do
 
       it 'should show business' do
         json = JSON.parse(response.body)
-        expect(json['data']['id']).to eq(business.id)
+        expect(json['data']['id']).to eq(business.id.to_s)
       end
     end
   end

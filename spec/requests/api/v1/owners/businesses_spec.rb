@@ -20,7 +20,7 @@ RSpec.describe "Api::V1::Owners::Businesses", type: :request do
 
         it 'should show active and available businesses' do
           json = JSON.parse(response.body)
-          expect(json.first['id']).to eq(business.id)
+          expect(json["data"].first["attributes"]["id"]).to eq(business.id)
         end
       end
 
@@ -36,7 +36,7 @@ RSpec.describe "Api::V1::Owners::Businesses", type: :request do
 
         it 'shows all businesses created by owner' do
           json = JSON.parse(response.body)
-          expect(json.first['id']).to eq(business.id)
+          expect(json["data"].first["attributes"]["id"]).to eq(business.id)
         end
       end
     end
@@ -54,7 +54,7 @@ RSpec.describe "Api::V1::Owners::Businesses", type: :request do
 
         it 'should create a business' do
           json = JSON.parse(response.body)
-          expect(json['name']).to eq(business_params[:name])
+          expect(json["data"]["attributes"]["name"]).to eq(business_params[:name])
         end
       end
 

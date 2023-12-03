@@ -5,7 +5,7 @@ class Api::V1::Owners::BuyOrdersController < ApplicationController
     if @buy_orders.empty?
       render json: { message: 'No buy orders found' }, status: :ok
     else
-      render json: serialized_response, status: :ok
+      render json: BuyOrderSerializer.new(@buy_orders).serializable_hash, status: :ok
     end
   end
 
@@ -17,7 +17,7 @@ class Api::V1::Owners::BuyOrdersController < ApplicationController
       ActiveRecord::Base.transaction do
         @buy_order.update_shares_available
       end
-      render json: @buy_order, status: :ok
+      render json: BuyOrderSerializer.new(@buy_order).serializable_hash, status: :ok
     else
       render json: @buy_order.errors, status: :unprocessable_entity
     end
@@ -29,19 +29,5 @@ class Api::V1::Owners::BuyOrdersController < ApplicationController
 
   def buy_order_params
     params.require(:buy_order).permit(:id, :status)
-  end
-
-  def serialized_response
-    @buy_orders.map do |buy_order|
-      {
-        id: buy_order.id,
-        quantity: buy_order.quantity,
-        price: buy_order.price,
-        status: buy_order.status,
-        business: buy_order.business.name,
-        buyer: buy_order.buyer.name,
-        shares_available: buy_order.business.shares_available
-      }
-    end
   end
 end

@@ -5,14 +5,14 @@ class Api::V1::BusinessesController < ApplicationController
   # GET /businesses
   def index
     @businesses = Business.all
-    render json: { data: @businesses }, status: :ok
+    render json: BusinessSerializer.new(@businesses).serializable_hash, status: :ok
   end
 
   # Will show a business
   # GET /businesses/:id
   def show
     if @business.present?
-      render json: { data: @business }, status: :ok
+      render json: BusinessSerializer.new(@business).serializable_hash, status: :ok
     else
       render json: { error: "Business not found" }, status: :not_found
     end

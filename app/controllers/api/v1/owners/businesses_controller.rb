@@ -4,13 +4,13 @@ class Api::V1::Owners::BusinessesController < ApplicationController
   # Does not require status to be active or available
   def index
     @businesses = current_user.businesses
-    render json: @businesses, status: :ok
+    render json: BusinessSerializer.new(@businesses).serializable_hash, status: :ok
   end
 
   def create
     @business = current_user.businesses.new(business_params)
     if @business.save
-      render json: @business, status: :created
+      render json: BusinessSerializer.new(@business).serializable_hash, status: :created
     else
       render json: @business.errors, status: :unprocessable_entity
     end

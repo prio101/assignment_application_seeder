@@ -20,7 +20,7 @@ RSpec.describe "/api/v1/buyers/businesses", type: :request do
 
         it 'should show active and available businesses' do
           json = JSON.parse(response.body)
-          expect(json.first['id']).to eq(business.id)
+          expect(json["data"].first["attributes"]["id"]).to eq(business.id)
         end
       end
 
@@ -70,7 +70,7 @@ RSpec.describe "/api/v1/buyers/businesses", type: :request do
 
         it 'should show active and available businesses' do
           json = JSON.parse(response.body)
-          expect(json['id']).to eq(business.id)
+          expect(json["data"]["attributes"]["id"]).to eq(business.id)
         end
       end
 

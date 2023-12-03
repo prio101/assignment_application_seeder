@@ -30,7 +30,7 @@ RSpec.describe "Api::V1::Buyers::BuyOrders", type: :request do
 
         it 'should show active and available buy_orders' do
           json = JSON.parse(response.body)
-          expect(json.first['id']).to eq(buy_order.id)
+          expect(json["data"].first["attributes"]["id"]).to eq(buy_order.id)
         end
       end
 
@@ -65,7 +65,7 @@ RSpec.describe "Api::V1::Buyers::BuyOrders", type: :request do
 
         it 'should create a buy_order' do
           json = JSON.parse(response.body)
-          expect(json['business_id']).to eq(business.id)
+          expect(json["data"]["attributes"]["business"]).to eq(business.name)
         end
 
       end
