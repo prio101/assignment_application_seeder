@@ -1,4 +1,6 @@
 class Api::V1::UsersController < ApplicationController
+  # THIS API IS CREATED only for crud operation and easily creating the users.
+
   before_action :set_user, only: [:show, :update, :destroy]
 
   def index

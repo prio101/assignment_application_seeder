@@ -12,7 +12,7 @@ class Api::V1::Owners::BuyOrdersController < ApplicationController
   # PATCH /owners/buy_orders/:id
   # params: { id: [integer | string], status: string }
   def update
-    @buy_order = BuyOrder.find_by(id: params[:id])
+    @buy_order = BuyOrder.find_by(id: params[:id], business_id: current_user.businesses.pluck(:id))
     if @buy_order.update(status: buy_order_params[:status])
       ActiveRecord::Base.transaction do
         @buy_order.update_shares_available

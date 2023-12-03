@@ -8,11 +8,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :businesses do
-        resources :buy_orders, only: [:index]
-      end
-
-      resources :buy_orders
+      resources :businesses
       resources :users
 
       resources :buyers do
