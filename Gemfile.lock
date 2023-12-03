@@ -68,6 +68,9 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
+    annotate (3.2.0)
+      activerecord (>= 3.2, < 8.0)
+      rake (>= 10.4, < 14.0)
     bcrypt (3.1.20)
     bootsnap (1.17.0)
       msgpack (~> 1.2)
@@ -94,6 +97,7 @@ GEM
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
+    docile (1.4.0)
     erubi (1.12.0)
     factory_bot (6.4.2)
       activesupport (>= 5.0.0)
@@ -110,6 +114,9 @@ GEM
     irb (1.9.1)
       rdoc
       reline (>= 0.3.8)
+    jbuilder (2.11.5)
+      actionview (>= 5.0.0)
+      activesupport (>= 5.0.0)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -203,6 +210,14 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    shoulda-matchers (5.3.0)
+      activesupport (>= 5.2.0)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.4)
     spring (4.1.3)
     stringio (3.1.0)
     thor (1.3.0)
@@ -221,6 +236,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  annotate
   bcrypt (~> 3.1.7)
   bootsnap
   capybara
@@ -228,11 +244,14 @@ DEPENDENCIES
   debug
   factory_bot_rails
   faker
+  jbuilder
   pg (~> 1.2, >= 1.2.3)
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
   rspec-rails
   selenium-webdriver
+  shoulda-matchers (~> 5.0)
+  simplecov
   spring
   tzinfo-data
 

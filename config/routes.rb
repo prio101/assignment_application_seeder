@@ -3,4 +3,28 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  # example: Method api/v1/resources
+
+  namespace :api do
+    namespace :v1 do
+      resources :businesses do
+        resources :buy_orders, only: [:index]
+      end
+
+      resources :buy_orders
+      resources :users
+
+      resources :buyers do
+        resources :businesses, only: [:index, :show], controller: 'buyers/businesses'
+        resources :buy_orders, only: [:index, :show], controller: 'buyers/buy_orders'
+      end
+
+      resources :owners do
+        resources :businesses, only: [:index, :create, :delete], controller: 'owners/businesses'
+        resources :buy_orders, only: [:index, :update], controller: 'owners/buy_orders'
+      end
+    end
+  end
+
 end
