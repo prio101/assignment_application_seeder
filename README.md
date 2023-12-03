@@ -51,3 +51,9 @@ Here we are attaching an ERD representation of the database schema:
 You can check the coverage by running `docker compose run web rspec` and then opening the `coverage/index.html` file in your browser.
 
 
+### Variations:
+
+There are few variation for this single application available right now on three different branches:
+1. `main` -> has the basic implementation of the application, with controller providing the API responses.
+2. `fast_json_api` -> has the implementation of the application using fast_json_api, with controller -> serializer providing the API responses.
+3. `jbuilder` -> has the implementation of the application using jbuilder, with controller -> jbuilder views providing the API responses.
