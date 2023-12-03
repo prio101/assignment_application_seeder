@@ -2,12 +2,16 @@ class Api::V1::Buyers::BuyOrdersController < ApplicationController
   # GET /buyers/buy_orders
   def index
     @buy_orders = current_user.buy_orders
-    render json: @buy_orders, status: :ok
+    if @buy_orders.empty?
+      render json: { message: 'No buy orders found' }, status: :ok
+    else
+      render json: @buy_orders, status: :ok
+    end
   rescue => e
     render json: { error: e.message }, status: :internal_server_error
   end
 
-  # POST /buyers/buy_orders
+  # POST  /api/v1/buyers/:buyer_id/buy_orders
   # Params: business_id, quantity, price
   def create
     @buy_order = current_user.buy_orders.build(buy_order_params)
