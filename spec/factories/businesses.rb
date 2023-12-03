@@ -5,6 +5,7 @@
 #  id               :bigint           not null, primary key
 #  name             :string
 #  shares_available :decimal(10, 2)   default(0.0)
+#  status           :string           default(NULL)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  owner_id         :bigint

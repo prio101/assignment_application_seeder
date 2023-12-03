@@ -11,16 +11,18 @@ Rails.application.routes.draw do
       resources :businesses do
         resources :buy_orders, only: [:index]
       end
+
       resources :buy_orders
       resources :users
 
       resources :buyers do
-        resources :businesses, only: [:index, :show], controller: 'api/v1/buyers/businesses'
-        resources :buy_orders, only: [:index, :create], controller: 'api/v1/buyers/buy_orders'
+        resources :businesses, only: [:index, :show], controller: 'buyers/businesses'
+        resources :buy_orders, only: [:index, :show], controller: 'buyers/buy_orders'
       end
 
       resources :owners do
-        resources :buy_orders, only: [:index, :update], controller: 'api/v1/owners/buy_orders'
+        resources :businesses, only: [:index, :create, :delete], controller: 'owners/businesses'
+        resources :buy_orders, only: [:index, :update], controller: 'owners/buy_orders'
       end
     end
   end
